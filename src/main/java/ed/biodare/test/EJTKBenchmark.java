@@ -119,7 +119,7 @@ public class EJTKBenchmark {
         return results;
     }    
 
-    @Benchmark
+    //@Benchmark
     public List<BD2eJTKRes> ListJTKRunNoCpy(ExecutionPlan params, Blackhole blackHole) {
         
 
@@ -133,7 +133,7 @@ public class EJTKBenchmark {
         return results;
     } 
     
-    @Benchmark
+    //@Benchmark
     public List<BD2eJTKRes> ListJTKRunFullCpy(ExecutionPlan params, Blackhole blackHole) {
         
 
@@ -145,7 +145,7 @@ public class EJTKBenchmark {
         return results;
     }     
     
-    @Benchmark
+    //@Benchmark
     public List<BD2eJTKRes> ListJTKRunRefCpy(ExecutionPlan params, Blackhole blackHole) {
         
 
@@ -159,7 +159,7 @@ public class EJTKBenchmark {
         return results;
     } 
     
-    @Benchmark
+    //@Benchmark
     public List<BD2eJTKRes> ListJTKRunRefCpyData(ExecutionPlan params, Blackhole blackHole) {
         
 
