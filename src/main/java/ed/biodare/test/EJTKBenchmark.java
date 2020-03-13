@@ -2,9 +2,13 @@
 
 package ed.biodare.test;
 
+import ed.biodare.rhythm.ejtk.BD2JTK;
 import ed.biodare.rhythm.ejtk.BD2eJTK;
 import ed.biodare.rhythm.ejtk.BD2eJTKRes;
+import ed.biodare.rhythm.ejtk.CopyingBD2JTK;
+import ed.biodare.rhythm.ejtk.IdentityBD2JTK;
 import ed.biodare.rhythm.ejtk.JTKPatterns;
+import ed.biodare.rhythm.ejtk.ListBD2JTK;
 import ed.biodare.rhythm.ejtk.patterns.JTKPattern;
 import java.util.List;
 import java.util.Random;
@@ -36,7 +40,8 @@ public class EJTKBenchmark {
     @State(Scope.Benchmark)
     public static class ExecutionPlan {
 
-        @Param({ "1", "4", "8", "16", "32", "64" })
+        //@Param({ "1", "4", "8", "16", "32", "64" })
+        @Param({ "12", "16", "24" })
         public int threads;
 
         int dataSize = 64*5*50;
@@ -55,7 +60,7 @@ public class EJTKBenchmark {
         }
     }
     
-    @Benchmark
+    //@Benchmark
     public List<BD2eJTKRes> eJTKRun(ExecutionPlan params, Blackhole blackHole) {
         
 
@@ -66,7 +71,120 @@ public class EJTKBenchmark {
         return results;
     }    
 
-  
+    //@Benchmark
+    public List<BD2eJTKRes> JTKRun(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        BD2JTK analyser = new BD2JTK(params.threads);
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    }     
+    
+    //@Benchmark
+    public List<BD2eJTKRes> NoRefCopyingJTKRun(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        CopyingBD2JTK analyser = new CopyingBD2JTK(params.threads);
+        analyser.cpyReferences = false;
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    }     
+    
+    //@Benchmark
+    public List<BD2eJTKRes> OnlyRefCopyingJTKRun(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        CopyingBD2JTK analyser = new CopyingBD2JTK(params.threads);
+        analyser.cpyReferences = true;
+        analyser.cpyZts = false;
+        analyser.cpySeries = false;
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    }    
+    
+    //@Benchmark
+    public List<BD2eJTKRes> FullCopyingJTKRun(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        BD2JTK analyser = new CopyingBD2JTK(params.threads);
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    }    
+
+    @Benchmark
+    public List<BD2eJTKRes> ListJTKRunNoCpy(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        ListBD2JTK analyser = new ListBD2JTK(params.threads);
+        analyser.cpySeries = false;
+        analyser.cpyZts = false;
+        analyser.cpyReferences = false;
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    } 
+    
+    @Benchmark
+    public List<BD2eJTKRes> ListJTKRunFullCpy(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        ListBD2JTK analyser = new ListBD2JTK(params.threads);
+        
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    }     
+    
+    @Benchmark
+    public List<BD2eJTKRes> ListJTKRunRefCpy(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        ListBD2JTK analyser = new ListBD2JTK(params.threads);
+        analyser.cpySeries = false;
+        analyser.cpyZts = false;
+        analyser.cpyReferences = true;
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    } 
+    
+    @Benchmark
+    public List<BD2eJTKRes> ListJTKRunRefCpyData(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        ListBD2JTK analyser = new ListBD2JTK(params.threads);
+        analyser.cpySeries = false;
+        analyser.cpyZts = false;
+        analyser.cpyReferences = true;
+        analyser.cpyRefPatterns = false;
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    }     
+    
+    
+    //@Benchmark
+    public List<BD2eJTKRes> IdentityJTKRun(ExecutionPlan params, Blackhole blackHole) {
+        
+
+        BD2JTK analyser = new IdentityBD2JTK(params.threads);
+        
+        List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
+        blackHole.consume(results);
+        return results;
+    } 
     
     static double[] makeTimes(int start, int end, int stepH) {
         

@@ -35,7 +35,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
     <groupId>ed.biodare.tests</groupId>
     <artifactId>threading</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>Threading performance</name>
@@ -61,7 +61,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
         <dependency>
             <groupId>ed.biodare.rhythm</groupId>
             <artifactId>eJTK</artifactId>
-            <version>2.2.2-SNAPSHOT</version>
+            <version>2.2.3-SNAPSHOT</version>
         </dependency>    
         
         <dependency>

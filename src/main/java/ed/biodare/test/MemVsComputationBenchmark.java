@@ -63,7 +63,7 @@ public class MemVsComputationBenchmark {
         }
     }
     
-    @Benchmark
+    //@Benchmark
     public long tablesCalc(ExecutionPlan params, Blackhole blackHole) {
         
 
