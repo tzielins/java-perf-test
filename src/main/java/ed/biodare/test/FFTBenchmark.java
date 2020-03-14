@@ -3,6 +3,7 @@
 package ed.biodare.test;
 
 import ed.biodare.period.fft_nlls.FFTMultiAnalyser;
+import ed.biodare.period.fft_nlls.second.FFTMultiAnalyser2;
 import ed.robust.dom.data.TimeSeries;
 import ed.robust.dom.tsprocessing.PPAResult;
 import ed.robust.util.timeseries.TSGenerator;
@@ -37,10 +38,10 @@ public class FFTBenchmark {
     public static class ExecutionPlan {
 
         //@Param({ "1", "4", "8", "16", "32", "64" })
-        @Param({ "8", "16", "32" })
+        @Param({"16", "32" })
         public int threads;
 
-        @Param({ "10", "50" })
+        @Param({ "10" })
         int chunkSize = 10;
         int dataSize = 64*5*10;
 
@@ -64,6 +65,15 @@ public class FFTBenchmark {
         return results;                 
     }
     
+    @Benchmark
+    public List<PPAResult> fft2(ExecutionPlan params, Blackhole blackHole) {
+        
+        FFTMultiAnalyser2 analyser = new FFTMultiAnalyser2(params.threads);
+        
+        List<PPAResult> results = analyser.analyse(params.data, 20, 28, params.chunkSize);
+        blackHole.consume(results);
+        return results;                 
+    }    
     
     static List<TimeSeries> makeData(int count, int length) {
 
