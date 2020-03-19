@@ -2,8 +2,7 @@
 
 package ed.biodare.test;
 
-import ed.biodare.period.fft_nlls.FFTMultiAnalyser;
-import ed.biodare.period.fft_nlls.second.FFTMultiAnalyser2;
+import ed.biodare.period.fft_nlls.FFTMultiAnalyser2;
 import ed.robust.dom.data.TimeSeries;
 import ed.robust.dom.tsprocessing.PPAResult;
 import ed.robust.util.timeseries.TSGenerator;
@@ -55,17 +54,8 @@ public class FFTBenchmark {
         }
     }
     
-    @Benchmark
-    public List<PPAResult> fft(ExecutionPlan params, Blackhole blackHole) {
-        
-        FFTMultiAnalyser analyser = new FFTMultiAnalyser(params.threads);
-        
-        List<PPAResult> results = analyser.analyse(params.data, 20, 28, params.chunkSize);
-        blackHole.consume(results);
-        return results;                 
-    }
     
-    @Benchmark
+    //@Benchmark
     public List<PPAResult> fft2(ExecutionPlan params, Blackhole blackHole) {
         
         FFTMultiAnalyser2 analyser = new FFTMultiAnalyser2(params.threads);
