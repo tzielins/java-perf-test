@@ -50,7 +50,7 @@ public class PPABenchmark {
     public static class ExecutionPlan {
 
         //@Param({ "1", "4", "8", "16", "32", "64" })
-        @Param({"8", "16", "24", "32" })
+        @Param({"8","16","24" })
         public int threads;
 
         @Param({ "10" })
@@ -66,6 +66,7 @@ public class PPABenchmark {
         @Setup(Level.Invocation)
         public void setUp() throws RobustFormatException, IOException {
             data = readTSData(dataSize);
+            //System.out.println("TS: "+data.size());
         }
 
         List<TimeSeries> readTSData(int dataSize) throws RobustFormatException, IOException {
@@ -88,7 +89,7 @@ public class PPABenchmark {
         }
     }
     
-    @Benchmark
+    //@Benchmark
     public List<PPAResult> fft(ExecutionPlan params, Blackhole blackHole) {
         
         PPAMultiAnalyser analyser = new FFTMultiAnalyser2(params.threads);
@@ -108,7 +109,7 @@ public class PPABenchmark {
         return results;                 
     }
     
-    @Benchmark
+    //@Benchmark
     public List<PPAResult> mesa(ExecutionPlan params, Blackhole blackHole) {
         
         PPAMultiAnalyser analyser = new MESAMultiAnalyser(params.threads);
@@ -118,7 +119,7 @@ public class PPABenchmark {
         return results;                 
     }    
     
-    @Benchmark
+    //@Benchmark
     public List<PPAResult> epr(ExecutionPlan params, Blackhole blackHole) {
         
         PPAMultiAnalyser analyser = new EPRMultiAnalyser(params.threads);
@@ -128,7 +129,7 @@ public class PPABenchmark {
         return results;                 
     } 
     
-    @Benchmark
+    //@Benchmark
     public List<PPAResult> lspr(ExecutionPlan params, Blackhole blackHole) {
         
         PPAMultiAnalyser analyser = new LSPRMultiAnalyser(params.threads);
