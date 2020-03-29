@@ -99,7 +99,7 @@ public class PPABenchmark {
         return results;                 
     }
     
-    @Benchmark
+    //@Benchmark
     public List<PPAResult> mff(ExecutionPlan params, Blackhole blackHole) {
         
         PPAMultiAnalyser analyser = new MFourFitMultiAnalyser(params.threads);
@@ -139,7 +139,7 @@ public class PPABenchmark {
         return results;                 
     }
 
-    @Benchmark
+    //@Benchmark
     public List<PPAResult> sr(ExecutionPlan params, Blackhole blackHole) {
         
         PPAMultiAnalyser analyser = new SRMultiAnalyser(params.threads);

@@ -41,7 +41,7 @@ public class EJTKBenchmark {
     public static class ExecutionPlan {
 
         //@Param({ "1", "4", "8", "16", "32", "64" })
-        @Param({ "12", "16", "24" })
+        @Param({ "1", "8", "16", "32" })
         public int threads;
 
         int dataSize = 64*5*50;
@@ -71,7 +71,7 @@ public class EJTKBenchmark {
         return results;
     }    
 
-    //@Benchmark
+    @Benchmark
     public List<BD2eJTKRes> JTKRun(ExecutionPlan params, Blackhole blackHole) {
         
 
@@ -119,14 +119,16 @@ public class EJTKBenchmark {
         return results;
     }    
 
-    //@Benchmark
-    public List<BD2eJTKRes> ListJTKRunNoCpy(ExecutionPlan params, Blackhole blackHole) {
+    @Benchmark
+    public List<BD2eJTKRes> ListJTKNoCpy(ExecutionPlan params, Blackhole blackHole) {
         
 
         ListBD2JTK analyser = new ListBD2JTK(params.threads);
         analyser.cpySeries = false;
         analyser.cpyZts = false;
         analyser.cpyReferences = false;
+        analyser.cpyRefData = false;
+        analyser.cpyRefPatterns = false;
         
         List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
         blackHole.consume(results);
@@ -134,7 +136,7 @@ public class EJTKBenchmark {
     } 
     
     //@Benchmark
-    public List<BD2eJTKRes> ListJTKRunFullCpy(ExecutionPlan params, Blackhole blackHole) {
+    public List<BD2eJTKRes> ListJTKFullCpy(ExecutionPlan params, Blackhole blackHole) {
         
 
         ListBD2JTK analyser = new ListBD2JTK(params.threads);
