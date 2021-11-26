@@ -49,8 +49,8 @@ public class PPABenchmark {
     @State(Scope.Benchmark)
     public static class ExecutionPlan {
 
-        //@Param({ "1", "4", "8", "16", "32", "64" })
-        @Param({"8","16","24" })
+        @Param({ "1", "4", "8" })
+        //@Param({"8","16","24" })
         public int threads;
 
         @Param({ "10" })

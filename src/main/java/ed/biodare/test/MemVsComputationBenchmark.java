@@ -43,7 +43,7 @@ public class MemVsComputationBenchmark {
     @State(Scope.Benchmark)
     public static class ExecutionPlan {
 
-        @Param({ "1", "4", "8", "16", "32", "64" })
+        @Param({ "1", "4", "8"})
         public int threads;
 
         @Param({ "false", "true" })

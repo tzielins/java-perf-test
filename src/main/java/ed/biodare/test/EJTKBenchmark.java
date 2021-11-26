@@ -40,8 +40,8 @@ public class EJTKBenchmark {
     @State(Scope.Benchmark)
     public static class ExecutionPlan {
 
-        //@Param({ "1", "4", "8", "16", "32", "64" })
-        @Param({ "1", "8", "16", "32" })
+        @Param({ "1", "4", "8"})
+        //@Param({ "1", "8", "16", "32" })
         public int threads;
 
         int dataSize = 64*5*50;

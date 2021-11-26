@@ -72,7 +72,7 @@ public class SmallTablesBenchmark {
     @State(Scope.Benchmark)
     public static class ExecutionPlan {
 
-        @Param({ "1", "4", "8", "16", "32", "48","64" })
+        @Param({ "1", "4", "8" })
         public int threads;
 
         @Param({ "true", "false" })
