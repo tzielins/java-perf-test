@@ -5,8 +5,8 @@ package ed.biodare.test;
 import ed.biodare.rhythm.ejtk.BD2JTK;
 import ed.biodare.rhythm.ejtk.BD2eJTK;
 import ed.biodare.rhythm.ejtk.BD2eJTKRes;
-import ed.biodare.rhythm.ejtk.CopyingBD2JTK;
-import ed.biodare.rhythm.ejtk.IdentityBD2JTK;
+//import ed.biodare.rhythm.ejtk.CopyingBD2JTK;
+//import ed.biodare.rhythm.ejtk.IdentityBD2JTK;
 import ed.biodare.rhythm.ejtk.JTKPatterns;
 import ed.biodare.rhythm.ejtk.ListBD2JTK;
 import ed.biodare.rhythm.ejtk.patterns.JTKPattern;
@@ -82,6 +82,7 @@ public class EJTKBenchmark {
         return results;
     }     
     
+    /*
     //@Benchmark
     public List<BD2eJTKRes> NoRefCopyingJTKRun(ExecutionPlan params, Blackhole blackHole) {
         
@@ -117,7 +118,7 @@ public class EJTKBenchmark {
         List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
         blackHole.consume(results);
         return results;
-    }    
+    } */   
 
     @Benchmark
     public List<BD2eJTKRes> ListJTKNoCpy(ExecutionPlan params, Blackhole blackHole) {
@@ -176,7 +177,7 @@ public class EJTKBenchmark {
         return results;
     }     
     
-    
+    /*
     //@Benchmark
     public List<BD2eJTKRes> IdentityJTKRun(ExecutionPlan params, Blackhole blackHole) {
         
@@ -186,7 +187,7 @@ public class EJTKBenchmark {
         List<BD2eJTKRes> results = analyser.analyseData(params.data, params.zts, params.patterns);
         blackHole.consume(results);
         return results;
-    } 
+    } */
     
     static double[] makeTimes(int start, int end, int stepH) {
         
